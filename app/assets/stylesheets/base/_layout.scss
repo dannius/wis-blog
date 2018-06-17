@@ -1,0 +1,22 @@
+html,
+body,
+.wrapper {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  padding: 0 15px;
+
+  &_relative {
+    position: relative;
+  }
+
+  &__column {
+    flex-direction: column;
+  }
+}

@@ -1,18 +1,17 @@
-h2 Log in
+.session
+  h2.text-center.session__headline Вход
 
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    = f.email_field :email, autofocus: true, autocomplete: "email"
+  .card.session__form
+    .card-body
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .form-group
+          = f.label :email
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
 
-  .field
-    = f.label :password
-    = f.password_field :password, autocomplete: "off"
+        .form-group
+          = f.label :password
+          = f.password_field :password, autocomplete: "off", class: "form-control"
 
-    - if devise_mapping.rememberable?
-      .field
-        = f.check_box :remember_me
-        = f.label :remember_me
-
-  .actions
-    = f.submit "Log in"
+        .actions.session__actions
+          = f.submit "Log in", class: 'btn btn-link'
+          = link_to 'Перейти на страницу входа', new_user_registration_path, class: "btn btn-link"

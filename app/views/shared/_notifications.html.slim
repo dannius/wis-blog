@@ -1,0 +1,9 @@
+- if !notice.blank? || !alert.blank?
+  .container.container_relative
+    .notification__list
+      - if !notice.blank?
+        p.alert.alert-info.alert-hiddable.notification__alert
+          = notice
+      - if !alert.blank?
+        p.alert.alert-danger.alert-hiddable.notification__alert
+          = alert

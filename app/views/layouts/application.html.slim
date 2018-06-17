@@ -14,8 +14,5 @@ html
   body
     .wrapper#vue-application
       = render partial: 'shared/header'
-      p.notice
-        = notice
-      p.alert
-        = alert
+      = render partial: 'shared/notifications'
       = yield
