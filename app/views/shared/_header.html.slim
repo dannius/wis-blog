@@ -1,0 +1,10 @@
+.header
+  ul.nav
+    - if user_signed_in?
+      li.nav-item
+        = link_to 'выход', destroy_user_session_path, method: :delete, class: "nav-link"
+    - else
+      li.nav-item
+        = link_to 'регистрация', new_user_registration_path, class: "nav-link"
+      li.nav-item
+        = link_to 'вход', new_user_session_path, class: "nav-link"
