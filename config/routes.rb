@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users, path: 'session',
+              controllers: { sessions: 'auth/sessions', registrations: 'auth/registrations' }
 
-  scope '/session' do
-    get 'signup', to: 'session#sign_up'
-    get 'signin', to: 'session#sign_in'
-  end
+  root to: 'categories#index'
 end
