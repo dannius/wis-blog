@@ -34,6 +34,7 @@ gem "slim-rails"
 gem 'webpacker', '~> 3.5'
 gem 'devise'
 gem 'bootstrap', '~> 4.1.1'
+gem 'font-awesome-sass'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
