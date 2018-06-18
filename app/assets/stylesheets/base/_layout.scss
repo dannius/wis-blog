@@ -20,3 +20,7 @@ body,
     flex-direction: column;
   }
 }
+
+[v-cloak] > * {
+  display:none;
+}

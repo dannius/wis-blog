@@ -11,7 +11,7 @@ html
     = csp_meta_tag
 
   body
-    .wrapper#vue-application
+    div.wrapper#vue-application v-cloak=""
       = render partial: 'shared/header'
       = render partial: 'shared/notifications'
       = yield

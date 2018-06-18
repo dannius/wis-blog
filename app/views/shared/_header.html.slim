@@ -1,14 +1,16 @@
 .header.navbar.navbar-dark.bg-dark
   .container
     - if user_signed_in?
-      = link_to home_path, class: "btn btn-dark"
+      = link_to home_path, method: :get, class: "btn btn-dark" do
         i.fa.fa-home aria-hidden="true"
     ul.navbar-nav.header__nav
+      li.nav-item.header__nav-item
+        = link_to 'пользователи', users_path, method: :get, class: "nav-link header__nav-link"
       - if user_signed_in?
         li.nav-item.header__nav-item
-          = link_to 'выход', destroy_user_session_path, method: :delete, class: "btn btn-dark"
+          = link_to 'выход', destroy_user_session_path, method: :delete, class: "nav-link header__nav-link"
       - else
         li.nav-item.header__nav-item
-          = link_to 'регистрация', new_user_registration_path, class: "nav-link header__nav-link"
+          = link_to 'регистрация', new_user_registration_path, method: :get, class: "nav-link header__nav-link"
         li.nav-item.header__nav-item
-          = link_to 'вход', new_user_session_path, class: "nav-link header__nav-link"
+          = link_to 'вход', new_user_session_path, method: :get, class: "nav-link header__nav-link"

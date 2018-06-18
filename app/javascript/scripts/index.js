@@ -1,1 +1,2 @@
-export * from './setupAlerts';
+export * from './setup-alerts';
+export * from './http-common';

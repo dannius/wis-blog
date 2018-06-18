@@ -1,15 +1,20 @@
 <template>
-  <div id="app">
+  <div>
     <p>{{ message }}</p>
   </div>
 </template>
 
 <script>
+import { HTTP } from '../scripts';
+
 export default {
-  data: function () {
+  data() {
     return {
       message: "Hello Vue!"
     }
+  },
+  created() {
+    console.log(1)
   }
 }
 </script>
