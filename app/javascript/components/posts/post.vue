@@ -7,6 +7,13 @@
 <script>
 
 export default {
-
+  data() {
+    return {
+      postId: this.$route.params.id,
+    }
+  },
+  created() {
+    console.log(this.postId);
+  }
 }
 </script>

@@ -7,7 +7,8 @@ import { setupAlerts, ROUTES } from '../scripts';
 Vue.use(VueRouter);
 
 const router = new VueRouter({
-  routes: ROUTES
+  routes: ROUTES,
+  linkActiveClass: "aside__link-active"
 })
 
 document.addEventListener('DOMContentLoaded', () => {
