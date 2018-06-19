@@ -9,6 +9,9 @@
     </div>
 
     <comment-list>
+      <template slot="comment-form">
+        <comment-form @onGetComment="pushComment($event)" :postId="post.id"></comment-form>
+      </template>
       <comment-item v-for="comment in post.comments" :key="comment.id" :comment="comment"></comment-item>
     </comment-list>
   </div>
@@ -16,7 +19,7 @@
 
 <script>
 import { http, formatTime, Storage } from '../../scripts';
-import { commentList, commentItem } from '../comments'
+import { commentList, commentItem, commentForm } from '../comments'
 
 export default {
   data() {
@@ -26,7 +29,10 @@ export default {
     }
   },
   methods: {
-    formatTime: (time) => formatTime(time)
+    formatTime: (time) => formatTime(time),
+    pushComment(comment) {
+      this.post.comments.push(comment);
+    }
   },
   created() {
     const selectedUser = Storage.getSelectedUser();
@@ -37,7 +43,8 @@ export default {
   },
   components: {
     commentList,
-    commentItem
+    commentItem,
+    commentForm
   }
 }
 </script>

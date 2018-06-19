@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :categories, only: [:create, :index, :destroy]
 
     resources :posts, only: [:create, :show, :index] do
-      resources :comments, only: [:create, :index]
+      resources :comments, only: [:create]
     end
   end
 end
