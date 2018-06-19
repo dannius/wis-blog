@@ -17,11 +17,9 @@ export default {
   },
   created() {
     this.user = Storage.getSelectedUser();
-    http.get(`users/${this.user && this.user.id}/posts`)
-      .then(({ data }) => {
-        const { posts } = data;
-        this.posts = posts;
-      })
+    http
+      .get(`users/${this.user && this.user.id}/posts`)
+      .then(({ data }) => this.posts = data)
   },
   components: {
     postItem

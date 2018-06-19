@@ -6,10 +6,21 @@ class PostsController < ApplicationController
   end
 
   def create
-    @users = User.all
+    draft_params = post_params
+    draft_params["user_id"] = current_user.id
+    @post = Post.create(draft_params)
+
+    if @post.invalid?
+      render status: 422
+    end
   end
 
   def show
     @post = Post.find_by_id([params[:id]])
   end
+
+  private
+    def post_params
+      params.require(:post).permit(:title, :content, :category_id)
+    end
 end

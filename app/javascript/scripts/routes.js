@@ -1,6 +1,7 @@
-import { post, postList } from '../components/posts'
+import { post, postList, postForm } from '../components/posts'
 
 export const ROUTES = [
   { path: '/', component: postList },
-  { path: '/post/:id', component: post }
+  { path: '/posts/new', component: postForm },
+  { path: '/posts/:id', component: post }
 ]

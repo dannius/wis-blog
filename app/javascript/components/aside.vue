@@ -10,7 +10,10 @@
       >
       </category-item>
     </category-list>
-    <category-form @onGetCategory="pushCategory($event)" v-if="isOwnership"></category-form>
+    <div v-if="isOwnership">
+      <category-form @onGetCategory="pushCategory($event)"></category-form>
+      <router-link to="/posts/new" class="btn btn-link">Создать пост</router-link>
+    </div>
   </div>
 </template>
 
@@ -40,10 +43,9 @@ export default {
     Storage.setCurrentUser(this.currentUser);
     Storage.setSelectedUser(this.selectedUser);
 
-    http.get(`users/${this.selectedUser.id}/categories`)
-      .then(({ data }) => {
-        this.categories = data;
-      })
+    http
+      .get(`users/${this.selectedUser.id}/categories`)
+      .then(({ data }) => this.categories = data)
   },
   computed: {
     isOwnership() {

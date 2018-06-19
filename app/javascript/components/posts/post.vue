@@ -4,7 +4,7 @@
       <div class="card-body">
         <h3 class="card-title">{{ post.title }}</h3>
         <p class="card-text">{{post.content}}</p>
-        <p class="text-right mb-1 mt-10 text-muted">Дата создания: {{post.createdAt}}</p>
+        <p class="text-right mb-1 mt-10 text-muted">Дата создания: {{formatTime(post.createdAt)}}</p>
       </div>
     </div>
 
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { http } from '../../scripts';
+import { http, formatTime } from '../../scripts';
 import { commentList, commentItem } from '../comments'
 
 export default {
@@ -25,12 +25,13 @@ export default {
       post: {}
     }
   },
+  methods: {
+    formatTime: (time) => formatTime(time)
+  },
   created() {
-    http.get(`users/${1}/posts/${this.postId}`)
-      .then(({ data }) => {
-        const { post } = data;
-        this.post = post;
-      })
+    http
+      .get(`users/${1}/posts/${this.postId}`)
+      .then(({ data }) => this.post = data)
   },
   components: {
     commentList,

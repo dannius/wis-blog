@@ -8,7 +8,7 @@
     </div>
     <ul class="category-item__post-list list-group">
       <li v-for="post in category.posts" :key="post.id" class="category-item__post-item">
-        <router-link :to="`/post/${post.id}`" class="btn btn-link w-100 text-left">{{ post.title }}</router-link>
+        <router-link :to="`/posts/${post.id}`" class="btn btn-link w-100 text-left">{{ post.title }}</router-link>
       </li>
     </ul>
   </li>
@@ -29,9 +29,8 @@ export default {
   methods: {
     deleteCategory(id) {
       http.delete(`users/${this.currentUser.id}/categories/${id}`)
-        .then(({ data }) => {
-          this.$emit('onDestroyCategory', data);
-        }).catch((err) => {
+        .then(({ data }) => this.$emit('onDestroyCategory', data))
+        .catch((err) => {
           console.log('Something went wrong...');
           this.toggleForm();
         })
