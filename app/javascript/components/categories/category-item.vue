@@ -33,6 +33,7 @@ export default {
         .catch((err) => {
           console.log('Something went wrong...');
           this.toggleForm();
+          this.$router.push('/');
         })
     },
   },

@@ -40,6 +40,7 @@ export default {
     http
       .get(`users/${selectedUser.id}/posts/${this.postId}`)
       .then(({ data }) => this.post = data)
+      .catch(() => this.$router.push('/'))
   },
   components: {
     commentList,
