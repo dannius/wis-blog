@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   layout "simple", only: [:index]
 
   def index
-    @posts = Post.where(user_id: params[:user_id])
+    @posts = Post.where(user_id: params[:user_id]).last(5).reverse()
   end
 
   def create

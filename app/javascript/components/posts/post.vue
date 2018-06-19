@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { http, formatTime } from '../../scripts';
+import { http, formatTime, Storage } from '../../scripts';
 import { commentList, commentItem } from '../comments'
 
 export default {
@@ -29,8 +29,10 @@ export default {
     formatTime: (time) => formatTime(time)
   },
   created() {
+    const selectedUser = Storage.getSelectedUser();
+
     http
-      .get(`users/${1}/posts/${this.postId}`)
+      .get(`users/${selectedUser.id}/posts/${this.postId}`)
       .then(({ data }) => this.post = data)
   },
   components: {
