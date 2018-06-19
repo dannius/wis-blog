@@ -6,10 +6,11 @@
         v-for="category in categories"
         :key="category.id"
         :category="category"
+        @onDestroyCategory="destroyCategory($event)"
       >
       </category-item>
     </category-list>
-    <category-form v-if="isOwnership"></category-form>
+    <category-form @onGetCategory="pushCategory($event)" v-if="isOwnership"></category-form>
   </div>
 </template>
 
@@ -28,7 +29,12 @@ export default {
     }
   },
   methods: {
-
+    pushCategory(category) {
+      this.categories.push(category)
+    },
+    destroyCategory(category) {
+      this.categories = this.categories.filter((cat) => cat.id !== category.id);
+    }
   },
   created() {
     Storage.setCurrentUser(this.currentUser);
@@ -36,13 +42,13 @@ export default {
 
     http.get(`users/${this.selectedUser.id}/categories`)
       .then(({ data }) => {
-        this.categories = data.categories;
+        this.categories = data;
       })
   },
   computed: {
     isOwnership() {
       return Storage.isOwnershipAccount();
-    }
+    },
   },
   components: {
     categoryList,

@@ -9,8 +9,8 @@ class UsersController < ApplicationController
     @selected_user = User.find_by_id([params[:id]])
 
     @selected_user = {
-      id: @selected_user.id,
-      email: @selected_user.email
+      id: (@selected_user.present?) ? @selected_user.id : nil,
+      email: (@selected_user.present?) ? @selected_user.email : nil
     }
 
     @signed_in_user = {
