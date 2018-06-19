@@ -1,5 +1,5 @@
 import Vue from 'vue/dist/vue.esm';
-import Categories from '../components/categories';
+import asideApp from '../components/aside';
 
 import { setupAlerts } from '../scripts';
 
@@ -7,11 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
   new Vue({
     el: '#vue-application',
     components: {
-      Categories
+      asideApp
     }
   })
 
   // functions 
   setupAlerts();
 })
-

@@ -5,7 +5,6 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application'
 
     = csrf_meta_tags
     = csp_meta_tag
@@ -14,4 +13,10 @@ html
     div.wrapper#vue-application v-cloak=""
       = render partial: 'shared/header'
       = render partial: 'shared/notifications'
-      = yield
+      .content
+        aside-app{
+          :current-user="{id: '#{@signed_in_user[:id]}', email: '#{@signed_in_user[:email]}'}"
+          :selected-user="{id: '#{@selected_user[:id]}', email: '#{@selected_user[:email]}'}"
+        }
+        = yield
+  = javascript_pack_tag 'application'

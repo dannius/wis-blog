@@ -21,6 +21,10 @@ body,
   }
 }
 
+.content {
+  display: flex;
+}
+
 [v-cloak] > * {
   display:none;
 }

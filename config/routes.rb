@@ -7,8 +7,6 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show]
 
-  get "api/current-user", to: "account#signed_in_user"
-
   scope '/api/users/:user_id' do
     resources :categories, only: [:create, :index, :show] do
       resources :posts, only: [:create, :show] do
