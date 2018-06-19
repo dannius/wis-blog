@@ -9,13 +9,13 @@
       >
       </category-item>
     </category-list>
-    <category-form></category-form>
+    <category-form v-if="isOwnership"></category-form>
   </div>
 </template>
 
 <script>
 import { categoryList, categoryItem, categoryForm } from './categories';
-import { HTTP, USER } from '../scripts';
+import { http, Storage } from '../scripts';
 
 export default {
   props: {
@@ -28,15 +28,21 @@ export default {
     }
   },
   methods: {
-    saveUserToStorage(activeUser) {
-      localStorage.setItem(USER, JSON.stringify(activeUser));
-    }
+
   },
   created() {
-    HTTP.get(`users/${this.selectedUser.id}/categories`)
+    Storage.setCurrentUser(this.currentUser);
+    Storage.setSelectedUser(this.selectedUser);
+
+    http.get(`users/${this.selectedUser.id}/categories`)
       .then(({ data }) => {
         this.categories = data.categories;
       })
+  },
+  computed: {
+    isOwnership() {
+      return Storage.isOwnershipAccount();
+    }
   },
   components: {
     categoryList,

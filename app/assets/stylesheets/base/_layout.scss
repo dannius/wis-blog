@@ -6,6 +6,11 @@ body,
   margin: 0;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
   max-width: 1000px;
   margin: 0 auto;
@@ -23,6 +28,14 @@ body,
 
 .content {
   display: flex;
+  flex: 1;
+
+  &__inner {
+    max-width: 600px;
+    margin-left: 15px;
+    margin-top: 58px;
+    padding-right: 15px;
+  }
 }
 
 [v-cloak] > * {

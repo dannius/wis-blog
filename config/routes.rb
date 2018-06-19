@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
 
   scope '/api/users/:user_id' do
-    resources :categories, only: [:create, :index, :show] do
-      resources :posts, only: [:create, :show] do
-        resources :comments, only: [:create, :index]
-      end
+    resources :categories, only: [:create, :index, :show]
+
+    resources :posts, only: [:create, :show, :index] do
+      resources :comments, only: [:create, :index]
     end
   end
 end
