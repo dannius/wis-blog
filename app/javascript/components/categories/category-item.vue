@@ -3,7 +3,7 @@
     {{category.title}}
     <ul class="category-item__post-list list-group">
       <li v-for="post in category.posts" :key="post.id" class="category-item__post-item">
-        <button class="btn btn-link w-100 text-left">{{ post.title }}</button>
+        <router-link :to="`/post/${post.id}`" class="btn btn-link w-100 text-left">{{ post.title }}</router-link>
       </li>
     </ul>
   </li>

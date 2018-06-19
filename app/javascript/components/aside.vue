@@ -1,6 +1,6 @@
 <template>
   <div class="aside">
-    <button class="btn btn-link aside__article-btn">последние статьи</button>
+    <router-link to="/" class="btn btn-link aside__article-btn">последние статьи</router-link>
     <category-list>
       <category-item
         v-for="category in categories"
