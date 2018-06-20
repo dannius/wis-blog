@@ -18,8 +18,9 @@
 </template>
 
 <script>
-import { http, formatTime, Storage } from '../../scripts';
+import { http, formatTime } from '../../scripts';
 import { commentList, commentItem, commentForm } from '../comments'
+import { mapState } from 'vuex';
 
 export default {
   data() {
@@ -28,17 +29,20 @@ export default {
       post: {}
     }
   },
+  computed: {
+    ...mapState({
+      selectedUser: state => state.selectedUser,
+    }),
+  },
   methods: {
     formatTime: (time) => formatTime(time),
     pushComment(comment) {
       this.post.comments.push(comment);
     }
   },
-  created() {
-    const selectedUser = Storage.getSelectedUser();
-
+  mounted() {
     http
-      .get(`users/${selectedUser.id}/posts/${this.postId}`)
+      .get(`users/${this.selectedUser.id}/posts/${this.postId}`)
       .then(({ data }) => this.post = data)
       .catch(() => this.$router.push('/'))
   },

@@ -10,16 +10,20 @@
 </template>
 
 <script>
-import { http, Storage } from '../../scripts';
-import { mapActions } from 'vuex';
+import { http } from '../../scripts';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   data() {
     return {
       showForm: false,
-      title: '',
-      currentUser: null,
+      title: ''
     }
+  },
+  computed: {
+    ...mapState({
+      currentUser: state => state.currentUser,
+    }),
   },
   methods: {
     ...mapActions({
@@ -43,9 +47,6 @@ export default {
           this.toggleForm();
         })
     }
-  },
-  created() {
-    this.currentUser = Storage.getCurrentUser();
   }
 }
 </script>

@@ -2,7 +2,8 @@ class UsersController < ApplicationController
   layout "simple", only: [:index]
 
   def index
-    @users = User.all
+    current_user_id = (current_user.present?) ? current_user.id : -1
+    @users = User.where("id != #{current_user_id}")
   end
 
   def show

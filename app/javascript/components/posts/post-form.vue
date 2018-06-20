@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import { http, Storage } from '../../scripts';
-import { mapActions } from 'vuex';
+import { http } from '../../scripts';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   data() {
@@ -28,8 +28,7 @@ export default {
       categories: [],
       title: '',
       content: '',
-      selectedCategoryId: -1,
-      currentUser: null
+      selectedCategoryId: -1
     }
   },
   props: {
@@ -56,13 +55,14 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      currentUser: state => state.currentUser,
+    }),
     isFormValid() {
       return !!this.selectedCategoryId && !!this.title && !!this.content;
     }
   },
-  created() {
-    this.currentUser = Storage.getCurrentUser();
-
+  mounted() {
     if (!this.currentUser) {
       return;
     }

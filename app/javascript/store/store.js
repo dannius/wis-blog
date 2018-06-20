@@ -1,13 +1,28 @@
 import Vue from 'vue/dist/vue.esm';
 import Vuex from 'vuex';
 
-import { ADD_POST_TO_CATEGORY, PUSH_CATEGORY, REMOVE_CATEGORY, SET_CATEGORIES } from './mutatuon-types';
+import {
+  ADD_POST_TO_CATEGORY,
+  PUSH_CATEGORY,
+  REMOVE_CATEGORY,
+  SET_CATEGORIES,
+  SET_CURRENT_USER,
+  SET_SELECTED_USER
+} from './mutatuon-types';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
       categories: [],
+      currentUser: Object,
+      selectedUser: Object,
+    },
+    getters: {
+      isAccountOwner: ({ currentUser, selectedUser}) => () => {
+        return (currentUser && currentUser.id) === (selectedUser && selectedUser.id)
+      },
+      isLoggedIn: ({ currentUser }) => () => currentUser && !!currentUser.id
     },
     actions: {
       setCategories({ commit }, payload) {
@@ -21,6 +36,12 @@ export default new Vuex.Store({
       },
       addPostToCategory({ commit }, payload) {
         commit(ADD_POST_TO_CATEGORY, payload);
+      },
+      setCurrentUser({ commit }, payload) {
+        commit(SET_CURRENT_USER, payload);
+      },
+      setSelectedUser({ commit }, payload) {
+        commit(SET_SELECTED_USER, payload);
       }
     },
     mutations: {
@@ -39,6 +60,12 @@ export default new Vuex.Store({
             category.posts.push(post);
           }
         })
+      },
+      [SET_CURRENT_USER] (state, { user }) {
+        state.currentUser = user;
+      },
+      [SET_SELECTED_USER] (state, { user }) {
+        state.selectedUser = user;
       }
     },
 })

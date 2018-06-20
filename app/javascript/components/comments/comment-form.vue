@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { http, Storage } from '../../scripts';
+import { http } from '../../scripts';
 
 export default {
   data() {

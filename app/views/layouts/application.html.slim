@@ -14,7 +14,7 @@ html
       = render partial: 'shared/header'
       = render partial: 'shared/notifications'
       .content
-        aside-app{
+        vue-app{
           :current-user="{id: '#{@signed_in_user[:id]}', email: '#{@signed_in_user[:email]}'}"
           :selected-user="{id: '#{@selected_user[:id]}', email: '#{@selected_user[:email]}'}"
         }

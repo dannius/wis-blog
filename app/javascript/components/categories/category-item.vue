@@ -15,17 +15,17 @@
 </template>
 
 <script>
-import { http, Storage } from '../../scripts';
-import { mapActions } from 'vuex';
+import { http } from '../../scripts';
+import { mapActions, mapState } from 'vuex';
 
 export default {
-  data() {
-    return {
-      currentUser: null
-    }
-  },
   props: {
     category: Object
+  },
+  computed: {
+    ...mapState({
+      currentUser: state => state.currentUser,
+    }),
   },
   methods: {
     ...mapActions({
@@ -33,16 +33,15 @@ export default {
     }),
     deleteCategory(id) {
       http.delete(`users/${this.currentUser.id}/categories/${id}`)
-        .then(({ data }) => this.removeCategory({ category: data }))
+        .then(({ data }) => {
+          this.removeCategory({ category: data })
+          this.$router.push('/');
+        })
         .catch((err) => {
           console.log('Something went wrong...');
           this.toggleForm();
-          this.$router.push('/');
         })
     },
-  },
-  created() {
-    this.currentUser = Storage.getCurrentUser();
   }
 }
 </script>

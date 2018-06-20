@@ -9,21 +9,24 @@
 
 <script>
 import postItem from './post-item';
-import { http, Storage } from '../../scripts';
+import { http } from '../../scripts';
+import { mapState } from 'vuex';
 
 export default {
   data() {
     return {
       posts: [],
-      user: null,
       isLoad: false
     }
   },
+  computed: {
+    ...mapState({
+      selectedUser: state => state.selectedUser,
+    }),
+  },
   created() {
-    this.user = Storage.getSelectedUser();
-
     http
-      .get(`users/${this.user && this.user.id}/posts`)
+      .get(`users/${this.selectedUser && this.selectedUser.id}/posts`)
       .then(({ data }) => {
         this.isLoad = true;
         this.posts = data;

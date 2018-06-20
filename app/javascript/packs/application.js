@@ -1,7 +1,7 @@
 import VueRouter from 'vue-router';
 import Vue from 'vue/dist/vue.esm';
 
-import asideApp from '../components/aside';
+import vueApp from '../components/vue-app';
 import { ROUTES, setupAlerts } from '../scripts';
 import store from '../store/store';
 
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     el: '#vue-application',
     store,
     components: {
-      asideApp
+      vueApp
     },
     router
   })
