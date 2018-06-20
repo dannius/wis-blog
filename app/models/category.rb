@@ -2,6 +2,6 @@ class Category < ApplicationRecord
   has_many :posts, dependent: :destroy
   belongs_to :user
 
-  validates :title, uniqueness: { case_sensitive: false }
+  validates_uniqueness_of :title, scope: :user_id
   validates :title, presence: true
 end

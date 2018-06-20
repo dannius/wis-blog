@@ -36,6 +36,9 @@ gem 'devise'
 gem 'bootstrap', '~> 4.1.1'
 gem 'font-awesome-sass'
 
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+gem "factory_bot_rails", "~> 4.0"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
