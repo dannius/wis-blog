@@ -12,7 +12,10 @@ class CommentsController < ApplicationController
 
     if @comment.invalid?
       render status: 422
+    else
+      UserMailer.with(user: @comment.post.user).comment_email.deliver_later
     end
+
   end
 
   private

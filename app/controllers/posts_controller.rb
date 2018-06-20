@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  layout "simple", only: [:index]
+  before_action :authenticate_user!, only: [:create]
 
   def index
     @posts = Post.where(user_id: params[:user_id]).last(5).reverse()
