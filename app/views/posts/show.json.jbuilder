@@ -1,11 +1,7 @@
-json.id @post.id
-json.title @post.title
-json.content @post.content
-json.createdAt @post.created_at
+json.partial! './posts/post', post: @post
 
-json.comments @post.comments do |comment|
-  json.id comment.id
-  json.author (comment.user.present?)? comment.user.email : nil
-  json.content comment.content
-  json.createdAt comment.created_at
+json.comments do
+  json.array!(@post.comments) do |comment|
+    json.partial! './comments/comment', comment: comment
+  end
 end

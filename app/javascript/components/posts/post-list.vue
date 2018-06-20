@@ -1,7 +1,10 @@
 <template>
-  <ul class="post-list list-group">
+  <ul v-if="isLoad && posts.length" class="post-list list-group">
     <post-item v-for="post in posts" :key="post.id" :post="post"></post-item>
   </ul>
+  <div v-else>
+    <h2>Постов нет</h2>
+  </div>
 </template>
 
 <script>
@@ -12,14 +15,18 @@ export default {
   data() {
     return {
       posts: [],
-      user: null
+      user: null,
+      isLoad: false
     }
   },
   created() {
     this.user = Storage.getSelectedUser();
     http
       .get(`users/${this.user && this.user.id}/posts`)
-      .then(({ data }) => this.posts = data)
+      .then(({ data }) => {
+        this.isLoad = true;
+        this.posts = data;
+      })
   },
   components: {
     postItem

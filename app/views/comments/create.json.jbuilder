@@ -1,3 +1,1 @@
-json.id @comment.id
-json.content @comment.content
-json.createdAt @comment.created_at
+json.partial! './comments/comment', comment: @comment
