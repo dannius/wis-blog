@@ -6,12 +6,11 @@
         v-for="category in categories"
         :key="category.id"
         :category="category"
-        @onDestroyCategory="destroyCategory($event)"
       >
       </category-item>
     </category-list>
     <div v-if="isOwnership">
-      <category-form @onGetCategory="pushCategory($event)"></category-form>
+      <category-form></category-form>
       <router-link to="/posts/new" class="btn btn-link">Создать пост</router-link>
     </div>
   </div>
@@ -20,34 +19,31 @@
 <script>
 import { categoryList, categoryItem, categoryForm } from './categories';
 import { http, Storage } from '../scripts';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   props: {
     currentUser: Object,
     selectedUser: Object
   },
-  data() {
-    return {
-      categories: null
-    }
-  },
   methods: {
-    pushCategory(category) {
-      this.categories.push(category)
-    },
-    destroyCategory(category) {
-      this.categories = this.categories.filter((cat) => cat.id !== category.id);
-    }
+    ...mapActions({
+      setCategories: 'setCategories',
+    })
   },
   created() {
+    //TODO: use vuex
     Storage.setCurrentUser(this.currentUser);
     Storage.setSelectedUser(this.selectedUser);
 
     http
       .get(`users/${this.selectedUser.id}/categories`)
-      .then(({ data }) => this.categories = data)
+      .then(({ data }) => this.setCategories({ categories: data }))
   },
   computed: {
+    ...mapState({
+      categories: state => state.categories,
+    }),
     isOwnership() {
       return Storage.isOwnershipAccount();
     },

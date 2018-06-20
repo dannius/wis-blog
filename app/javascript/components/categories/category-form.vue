@@ -11,6 +11,7 @@
 
 <script>
 import { http, Storage } from '../../scripts';
+import { mapActions } from 'vuex';
 
 export default {
   data() {
@@ -21,6 +22,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      pushCategory: 'pushCategory',
+    }),
     toggleForm() {
       this.showForm = !this.showForm;
     },
@@ -33,7 +37,7 @@ export default {
         .then(({ data }) => {
           this.title = '';
           this.toggleForm();
-          this.$emit('onGetCategory', data);
+          this.pushCategory({category: data});
         }).catch((err) => {
           console.log('Something went wrong...');
           this.toggleForm();

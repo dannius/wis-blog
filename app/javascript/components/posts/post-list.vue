@@ -21,6 +21,7 @@ export default {
   },
   created() {
     this.user = Storage.getSelectedUser();
+
     http
       .get(`users/${this.user && this.user.id}/posts`)
       .then(({ data }) => {

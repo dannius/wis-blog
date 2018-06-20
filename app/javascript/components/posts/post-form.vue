@@ -20,6 +20,7 @@
 
 <script>
 import { http, Storage } from '../../scripts';
+import { mapActions } from 'vuex';
 
 export default {
   data() {
@@ -35,6 +36,9 @@ export default {
     post: Object
   },
   methods: {
+    ...mapActions({
+      addPostToCategory: 'addPostToCategory'
+    }),
     savePost() {
       if (!this.isFormValid) {
         console.log('форма не валидна')
@@ -44,7 +48,10 @@ export default {
       http
         .post(`users/${this.currentUser && this.currentUser.id}/posts`,
         { post: { title: this.title, content: this.content, category_id: this.selectedCategoryId } })
-        .then(({ data }) => this.$router.push('/'))
+        .then(({ data }) => {
+          this.addPostToCategory({ post: data })
+          this.$router.push('/');
+        })
         .catch((err) => console.log('Something went wrong...'))
     }
   },
