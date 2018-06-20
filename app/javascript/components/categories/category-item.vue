@@ -16,6 +16,7 @@
 
 <script>
 import { http, Storage } from '../../scripts';
+import { mapActions } from 'vuex';
 
 export default {
   data() {
@@ -27,9 +28,12 @@ export default {
     category: Object
   },
   methods: {
+    ...mapActions({
+      removeCategory: 'removeCategory',
+    }),
     deleteCategory(id) {
       http.delete(`users/${this.currentUser.id}/categories/${id}`)
-        .then(({ data }) => this.$emit('onDestroyCategory', data))
+        .then(({ data }) => this.removeCategory({ category: data }))
         .catch((err) => {
           console.log('Something went wrong...');
           this.toggleForm();

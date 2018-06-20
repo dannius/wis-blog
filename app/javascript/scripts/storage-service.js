@@ -1,6 +1,7 @@
 const CURRENT_USER = 'active-user';
 const SELECTED_USER = 'selected-user';
 
+//TODO: use vuex
 export class Storage {
   static isOwnershipAccount() {
     const currentUser = this.getCurrentUser();
