@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100">
+  <div class="w-100" v-if="isLoad">
     <div class="card w-100 mb-4">
       <div class="card-body">
         <h3 class="card-title">{{ post.title }}</h3>
@@ -26,7 +26,8 @@ export default {
   data() {
     return {
       postId: this.$route.params.id,
-      post: {}
+      post: {},
+      isLoad: false
     }
   },
   computed: {
@@ -43,7 +44,10 @@ export default {
   mounted() {
     http
       .get(`users/${this.selectedUser.id}/posts/${this.postId}`)
-      .then(({ data }) => this.post = data)
+      .then(({ data }) => {
+        this.post = data;
+        this.isLoad = true;
+      })
       .catch(() => this.$router.push('/'))
   },
   components: {

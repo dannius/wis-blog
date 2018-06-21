@@ -1,6 +1,7 @@
 <template>
   <div class="aside">
-    <router-link to="/" exact class="btn btn-link aside__article-btn">последние статьи</router-link>
+    <router-link to="/" exact class="btn btn-link aside__top-link">последние статьи</router-link>
+    <router-link v-if="isAccountOwner()" to="/settings" exact class="btn btn-link aside__top-link">Настройки профиля</router-link>
     <category-list>
       <category-item
         v-for="category in categories"

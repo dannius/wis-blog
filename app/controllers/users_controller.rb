@@ -19,4 +19,14 @@ class UsersController < ApplicationController
       email: (user_signed_in?)? current_user.email : nil
     }
   end
+
+  def update
+    @user = User.find_by_id(params[:id])
+    puts photo_params
+  end
+
+  private
+    def photo_params
+      params.require(:user).permit(:photo)
+    end
 end

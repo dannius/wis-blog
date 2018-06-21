@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show]
 
+  patch "api/users/:id", to: "users#update", as: "update"
+
   scope '/api/users/:user_id' do
     resources :categories, only: [:create, :index, :destroy]
 

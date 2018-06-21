@@ -1,9 +1,11 @@
 <template>
-  <ul v-if="isLoad && posts.length" class="post-list list-group">
-    <post-item v-for="post in posts" :key="post.id" :post="post"></post-item>
-  </ul>
-  <div v-else>
-    <h2>Постов нет</h2>
+  <div>
+    <ul v-if="isLoad && posts.length" class="post-list list-group">
+      <post-item v-for="post in posts" :key="post.id" :post="post"></post-item>
+    </ul>
+    <div v-if="isLoad && !posts.length">
+      <h2>Постов нет</h2>
+    </div>
   </div>
 </template>
 
