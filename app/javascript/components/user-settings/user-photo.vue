@@ -1,6 +1,6 @@
 <template>
-  <div class="hello">
-    <img :src="imageUrl" alt="">
+  <div>
+    <img class="user__image" :src="imageUrl" alt="">
     <picture-input
       ref="pictureInput"
       @change="onChanged"
@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       image: '',
-      imageUrl: 'http://via.placeholder.com/200x230',
+      imageUrl: '',
     }
   },
   computed: {
@@ -46,15 +46,15 @@ export default {
         return;
       }
 
-      console.log(this.currentUser.id)
-
-      http.patch(`users/${this.currentUser.id}`, { user: { photo: this.image } })
-      .then((res) => {
-        console.log(res);
-        this.imageUrl = res;
+      http.patch(`users/${this.currentUser.id}`, { user: { base64: this.image } })
+      .then(({ data }) => {
+        this.imageUrl = data.photoUrl;
       })
       .catch((err) => console.log(err))
     }
+  },
+  mounted() {
+    this.imageUrl = this.currentUser.photoUrl || "http://via.placeholder.com/200x230";
   },
   components: {
     PictureInput

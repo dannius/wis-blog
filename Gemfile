@@ -36,6 +36,7 @@ gem 'devise'
 gem 'bootstrap', '~> 4.1.1'
 gem 'font-awesome-sass'
 gem 'aws-sdk', '~> 2'
+gem 'dotenv-rails'
 
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem "factory_bot_rails", "~> 4.0"
